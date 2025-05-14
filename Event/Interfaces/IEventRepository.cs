@@ -1,0 +1,19 @@
+﻿using System.Linq.Expressions;
+using Event.Data.Entities;
+
+namespace Event.Interfaces
+{
+    public interface IEventRepository
+    {
+        Task<EventEntity> AddAsync(EventEntity entity);
+        Task<bool> AlreadyExistsAsync(Expression<Func<EventEntity, bool>> expression);
+        Task BeginTransactionAsync();
+        Task CommitTransactionAsync();
+        Task<bool> DeleteAsync(Expression<Func<EventEntity, bool>> expression);
+        Task<IEnumerable<EventEntity>> GetAllAsync();
+        Task<EventEntity> GetAsync(Expression<Func<EventEntity, bool>> expression);
+        Task RollbackTransactionAsync();
+        Task<bool> SaveAsync();
+        Task<bool> UpdateAsync(Expression<Func<EventEntity, bool>> expression, EventEntity entityToUpdate);
+    }
+}
