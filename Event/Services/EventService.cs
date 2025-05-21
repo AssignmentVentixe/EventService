@@ -1,12 +1,12 @@
 ﻿using System.Diagnostics;
 using System.Linq.Expressions;
-using Event.Data.Entities;
-using Event.Extensions;
-using Event.Factories;
-using Event.Interfaces;
-using Event.Models;
+using API.Data.Entities;
+using API.Extensions;
+using API.Factories;
+using API.Interfaces;
+using API.Models;
 
-namespace Event.Services;
+namespace API.Services;
 
 public class EventService(IEventRepository eventRepository) : IEventService
 {
@@ -50,32 +50,32 @@ public class EventService(IEventRepository eventRepository) : IEventService
         return true;
     }
 
-    public async Task<IEnumerable<EventEntity>> GetAllEventsAsync()
+    public async Task<IEnumerable<Event>> GetAllEventsAsync()
     {
         var entities = await _eventRepository.GetAllAsync();
         if (entities == null)
             return null!;
-        var eventModels = entities.Select(x => x.MapTo<EventEntity>()).ToList();
+        var eventModels = entities.Select(x => x.MapTo<Event>()).ToList();
         return eventModels;
     }
 
-    public async Task<EventEntity> GetByExpressionAsync(Expression<Func<EventEntity, bool>> expression)
+    public async Task<Event> GetByExpressionAsync(Expression<Func<EventEntity, bool>> expression)
     {
         var entity = await _eventRepository.GetAsync(expression);
 
-        var eventModel = entity.MapTo<EventEntity>();
+        var eventModel = entity.MapTo<Event>();
 
         return eventModel;
     }
 
-    public async Task<EventEntity> UpdateEventAsync(string id, EventDto updateForm)
+    public async Task<bool> UpdateEventAsync(string id, EventDto updateForm)
     {
         if (updateForm == null)
-            return null!;
+            return false;
 
         var entityToUpdate = await _eventRepository.GetAsync(x => x.Id == id);
         if (entityToUpdate == null)
-            return null!;
+            return false;
 
         EventFactory.UpdateEventEntity(entityToUpdate, updateForm);
 
@@ -85,10 +85,10 @@ public class EventService(IEventRepository eventRepository) : IEventService
         if (!saved)
         {
             await _eventRepository.RollbackTransactionAsync();
-            return null!;
+            return false;
         }
 
         await _eventRepository.CommitTransactionAsync();
-        return entityToUpdate ?? null!;
+        return true;
     }
 }

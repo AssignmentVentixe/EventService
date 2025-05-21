@@ -1,8 +1,8 @@
-﻿using Event.Interfaces;
-using Event.Models;
+﻿using API.Interfaces;
+using API.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Event.Controllers;
+namespace API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -14,7 +14,7 @@ public class EventsController(IEventService eventService) : ControllerBase
     public async Task<IActionResult> GetAllEvents()
     {
         var events = await _eventService.GetAllEventsAsync();
-        return (events != null) 
+        return events != null 
             ? Ok(events) 
             : NotFound();
     }
@@ -24,7 +24,7 @@ public class EventsController(IEventService eventService) : ControllerBase
     {
         var eventModel = await _eventService.GetByExpressionAsync(x => x.Id == id);
 
-        return (eventModel != null)
+        return eventModel != null
             ? Ok(eventModel)
             : NotFound();
     }
@@ -37,7 +37,7 @@ public class EventsController(IEventService eventService) : ControllerBase
 
         var createdEvent = await _eventService.CreateEventAsync(eventDto);
 
-        return (createdEvent != null) 
+        return createdEvent != null 
             ? Ok(createdEvent) 
             : BadRequest("Failed to create event");
     }
@@ -49,7 +49,7 @@ public class EventsController(IEventService eventService) : ControllerBase
             return BadRequest(ModelState);
         
         var entityToUpdate = await _eventService.UpdateEventAsync(id, updateForm);
-        return (entityToUpdate != null)
+        return entityToUpdate
             ? Ok() 
             : BadRequest();
     }
@@ -58,7 +58,7 @@ public class EventsController(IEventService eventService) : ControllerBase
     public async Task<IActionResult> DeleteEvent(string id)
     {
         bool isDeleted = await _eventService.DeleteEventAsync(id);
-        return (isDeleted)
+        return isDeleted
             ? Ok() 
             : BadRequest();
     }

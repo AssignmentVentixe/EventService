@@ -1,12 +1,12 @@
-﻿using Event.Data.Contexts;
-using Microsoft.EntityFrameworkCore.Storage;
+﻿using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Linq.Expressions;
-using Event.Data.Entities;
-using Event.Interfaces;
+using API.Data.Entities;
+using API.Interfaces;
+using API.Data.Contexts;
 
-namespace Event.Data.Repositories;
+namespace API.Data.Repositories;
 
 public class EventRepository : IEventRepository
 {

@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Event.Extensions;
+namespace API.Extensions;
 
 public static class MappingExtensions
 {

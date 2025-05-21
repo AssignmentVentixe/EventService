@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Event.Data.Entities;
+namespace API.Data.Entities;
 
 public class EventEntity
 {
@@ -9,7 +9,7 @@ public class EventEntity
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string EventName { get; set; } = null!;
     public string? Description { get; set; }
-    public string? Location { get; set; } = null!;
+    public string? Location { get; set; }
     public DateTime? StartDate { get; set; } 
     public DateTime? EndDate { get; set; }
 

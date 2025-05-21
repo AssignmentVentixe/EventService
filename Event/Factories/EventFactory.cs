@@ -1,7 +1,7 @@
-﻿using Event.Data.Entities;
-using Event.Models;
+﻿using API.Data.Entities;
+using API.Models;
 
-namespace Event.Factories;
+namespace API.Factories;
 
 public class EventFactory
 {
@@ -12,6 +12,6 @@ public class EventFactory
         currentEntity.Location = updateForm.Location!;
         currentEntity.StartDate = updateForm.StartDate!;
         currentEntity.EndDate = updateForm.EndDate!;
-
+        currentEntity.Price = updateForm.Price!;
     }
 }

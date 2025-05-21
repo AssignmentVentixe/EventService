@@ -1,7 +1,7 @@
-using Event.Data.Contexts;
-using Event.Data.Repositories;
-using Event.Interfaces;
-using Event.Services;
+using API.Data.Contexts;
+using API.Data.Repositories;
+using API.Interfaces;
+using API.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

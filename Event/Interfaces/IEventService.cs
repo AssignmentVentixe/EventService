@@ -1,15 +1,15 @@
 ﻿using System.Linq.Expressions;
-using Event.Data.Entities;
-using Event.Models;
+using API.Data.Entities;
+using API.Models;
 
-namespace Event.Interfaces
+namespace API.Interfaces
 {
     public interface IEventService
     {
         Task<EventEntity> CreateEventAsync(EventDto registrationForm);
         Task<bool> DeleteEventAsync(string id);
-        Task<IEnumerable<EventEntity>> GetAllEventsAsync();
-        Task<EventEntity> GetByExpressionAsync(Expression<Func<EventEntity, bool>> expression);
-        Task<EventEntity> UpdateEventAsync(string id, EventDto updateForm);
+        Task<IEnumerable<Event>> GetAllEventsAsync();
+        Task<Event> GetByExpressionAsync(Expression<Func<EventEntity, bool>> expression);
+        Task<bool> UpdateEventAsync(string id, EventDto updateForm);
     }
 }
