@@ -1,6 +1,7 @@
 using Event.Data.Contexts;
 using Event.Data.Repositories;
 using Event.Interfaces;
+using Event.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IEventRepository, EventRepository>();
-
+builder.Services.AddScoped<IEventService, EventService>();
 
 builder.Services.AddOpenApi();
 var app = builder.Build();
