@@ -7,11 +7,11 @@ public class EventEntity
 {
     [Key]
     public string Id { get; set; } = Guid.NewGuid().ToString();
+    public string? ImageUrl { get; set; }
     public string EventName { get; set; } = null!;
     public string? Description { get; set; }
     public string? Location { get; set; }
     public DateTime? StartDate { get; set; } 
-    public DateTime? EndDate { get; set; }
 
     [Column(TypeName = "decimal(18,2)")]
     public decimal? Price { get; set; }

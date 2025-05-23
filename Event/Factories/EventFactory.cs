@@ -11,7 +11,6 @@ public class EventFactory
         currentEntity.Description = updateForm.Description!;
         currentEntity.Location = updateForm.Location!;
         currentEntity.StartDate = updateForm.StartDate!;
-        currentEntity.EndDate = updateForm.EndDate!;
         currentEntity.Price = updateForm.Price!;
     }
 }
