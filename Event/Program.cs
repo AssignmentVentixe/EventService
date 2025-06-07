@@ -7,8 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var vaultUri = new Uri("https://ventixe-kv.vault.azure.net/");
-builder.Configuration.AddAzureKeyVault(vaultUri, new DefaultAzureCredential());
+builder.Configuration.AddAzureKeyVault(new Uri(builder.Configuration["KeyVault:Uri"]!), new DefaultAzureCredential());
 
 builder.Services.AddControllers();
 
